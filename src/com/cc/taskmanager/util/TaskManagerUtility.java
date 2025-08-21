@@ -18,11 +18,19 @@ public class TaskManagerUtility {
 	static Scanner scanner = new Scanner(System.in);
 	
 	public static Set<String> parseTags(String tags) {
-		if (tags == null || tags.isEmpty()) {
-			return Set.of();
+		if (tags == null) {
+			//return Set.of();
+			return new java.util.LinkedHashSet<>();
+			
 		}
+		/*
 		String[] tagArray = tags.split(",");
 		return Set.of(tagArray);
+		*/
+		return java.util.Arrays.stream(tags.split(","))
+				.map(String::trim)
+				.filter(s -> !s.isEmpty())
+				.collect(java.util.stream.Collectors.toCollection(java.util.LinkedHashSet::new));
 	}
 	
 	/**

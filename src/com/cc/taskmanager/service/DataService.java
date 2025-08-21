@@ -27,6 +27,10 @@ public class DataService {
 	}
 	
 	public static void viewAllTask(List<Task> tasks, Priority priority) {
+		/*
+		 * Verifying that your CI/build uses Java 16+ (the minimum version that supports Stream.toList()), or
+		 * Replacing both calls with Collectors.toList() to maintain broader Java compatibility:
+		 */
 		
 		if (tasks.isEmpty()) {
 			System.out.println("No tasks available.");
@@ -36,7 +40,7 @@ public class DataService {
 		// Filter tasks by priority
 		List<Task> filteredTasks = tasks.stream()
 				.filter(task -> task.getPriority() == priority)
-				.toList();
+				.collect(java.util.stream.Collectors.toList());
 		
 		if (filteredTasks.isEmpty()) {
 			System.out.println("No tasks found with priority: " + priority);
@@ -59,7 +63,7 @@ public static void viewAllTask(List<Task> tasks, Status status) {
 		// Filter tasks by priority
 		List<Task> filteredTasks = tasks.stream()
 				.filter(task -> task.getStatus() == status)
-				.toList();
+				.collect(java.util.stream.Collectors.toList());
 		
 		if (filteredTasks.isEmpty()) {
 			System.out.println("No tasks found with status: " + status);

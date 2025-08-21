@@ -9,8 +9,6 @@ import com.cc.taskmanager.util.TaskManagerUtility;
 
 public class TaskService {
 	
-	TaskManagerUtility tmu = new TaskManagerUtility();
-	
 	public Task addTask() {
 		// Logic to add a task
 		String taskName = TaskManagerUtility.askString("What's the Task?");
@@ -23,16 +21,16 @@ public class TaskService {
 		/*
 		 * ALL THE BELOW WILL NO LONGER BE REQUIRED IF SYSTEM GAINS An U.I
 		 */
-		boolean hasDescription = TaskManagerUtility.askYesNo("Does the task have a description? (yes/no)");
+		boolean hasDescription = TaskManagerUtility.askYesNo("Does the task have a description?");
 		if (hasDescription) {
 			description = TaskManagerUtility.askString("Please enter the task description:");
 		}
-		boolean hasPriority = TaskManagerUtility.askYesNo("Does the task have a priority? (yes/no)");
+		boolean hasPriority = TaskManagerUtility.askYesNo("Does the task have a priority?");
 		if (hasPriority) {
 			priority = TaskManagerUtility.askPriority();
 			//TODO - validate priority
 		}
-		boolean hasTags = TaskManagerUtility.askYesNo("Does the task have tags? (yes/no)");
+		boolean hasTags = TaskManagerUtility.askYesNo("Does the task have tags?");
 		if (hasTags) {
 			String tags = TaskManagerUtility.askString("Please enter the task tags (comma-separated):");
 			tagsSet = TaskManagerUtility.parseTags(tags);
