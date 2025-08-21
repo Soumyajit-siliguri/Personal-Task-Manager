@@ -6,14 +6,18 @@ import java.util.List;
 import com.cc.taskmanager.model.Task;
 
 public class TempData {
-	List<Task> tempData = new ArrayList<>();
+	static List<Task> tempData = new ArrayList<>();
 
-	public List<Task> getTempData() {
+	public static List<Task> getTempData() {
 		return tempData;
 	}
 
-	public void setTempData(List<Task> tempData) {
-		this.tempData = tempData;
+	public static void setTempData(List<Task> tempData) {
+		TempData.tempData = tempData;
+	}
+	
+	public static void deleteTask(int taskId) {
+		tempData.removeIf(task -> task.getId() == taskId);
 	}
 	
 
