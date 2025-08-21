@@ -2,6 +2,7 @@ package com.cc.taskmanager.service;
 
 import java.util.List;
 
+import com.cc.taskmanager.data.TempData;
 import com.cc.taskmanager.enums.Priority;
 import com.cc.taskmanager.enums.Status;
 import com.cc.taskmanager.model.Task;
@@ -74,6 +75,38 @@ public static void viewAllTask(List<Task> tasks, Status status) {
 		for (Task task : filteredTasks) {
 			System.out.println(task);
 		}
+	}
+
+	public static void deleteTask(int taskId) {
+	// Logic to delete a task
+		if (taskId < 0) {
+			System.out.println("Invalid task ID.");
+			return;
+		}
+		
+		Task task = getTaskById(TempData.getTempData(), taskId);
+		if (task == null) {
+			System.out.println("Task with ID " + taskId + " not found.");
+			return;
+		}
+		
+		TempData.deleteTask(taskId);
+		
+	System.out.println("Task deleted with ID: " + taskId);
+	}
+
+	public static Task getTaskById(List<Task> taskList, int taskId) {
+		// TODO Auto-generated method stub
+		if (taskList == null || taskList.isEmpty()) {
+			System.out.println("No tasks available.");
+			return null;
+		}
+		for (Task task : taskList) {
+			if (task.getId() == taskId) {
+				return task;
+			}
+		}
+		return null;
 	}
 
 }
