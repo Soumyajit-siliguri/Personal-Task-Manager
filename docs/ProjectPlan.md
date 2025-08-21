@@ -3,15 +3,15 @@
 
 ## ✅ MVP CHECKLIST (Base Project + All Bonus Features)
 ### 🔹 PHASE 1 – Project Setup & Structure
-- [ ] Create Main.java with menu loop
-- [ ] Define Task class with:
-  - [ ] ID, Title, Description
-  - [ ] Due Date (as LocalDateTime)
-  - [ ] Priority (Enum: LOW, MEDIUM, HIGH)
-  - [ ] Tags (Set< String >)
-  - [ ] Status (Enum: TODO, IN_PROGRESS, DONE)
-- [ ] Basic CLI input flow using Scanner
-- [ ]  Directory Structure:
+- [X] Create Main.java with menu loop
+- [X] Define Task class with:
+  - [X] ID, Title, Description
+  - [X] Due Date (as LocalDateTime)
+  - [X] Priority (Enum: LOW, MEDIUM, HIGH)
+  - [X] Tags (Set< String >)
+  - [X] Status (Enum: TODO, IN_PROGRESS, DONE)
+- [X] Basic CLI input flow using Scanner
+- [X]  Directory Structure:
     ```text
     /taskmanager
   ├── Main.java
@@ -22,7 +22,7 @@
     ```
 
 ### 🔹 PHASE 2 – Task CRUD Operations (Basic Functionality)
-- [ ] Add New Task
+- [X] Add New Task
 - [ ] View All Tasks (sorted by creation time)
 - [ ] View by Status (filter)
 - [ ] Update Task (title, desc, tags, priority, status)
