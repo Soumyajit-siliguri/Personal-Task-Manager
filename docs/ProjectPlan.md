@@ -6,7 +6,7 @@
 - [X] Create Main.java with menu loop
 - [X] Define Task class with:
   - [X] ID, Title, Description
-  - [X] Due Date (as LocalDateTime)
+  - [X] Due Date (as LocalDate)
   - [X] Priority (Enum: LOW, MEDIUM, HIGH)
   - [X] Tags (Set< String >)
   - [X] Status (Enum: TODO, IN_PROGRESS, DONE)
