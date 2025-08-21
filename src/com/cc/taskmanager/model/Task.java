@@ -134,4 +134,27 @@ public class Task {
 		}
 		return sb.substring(0, sb.length() - 2); // Remove the last comma and space
 	}
+	
+	public void addTags(Set<String> tags2) {
+		// TODO Auto-generated method stub
+		if (tags2 != null && !tags2.isEmpty()) {
+			if (this.tags == null) {
+				this.tags = tags2;
+			} else {
+				this.tags.addAll(tags2);
+			}
+		} else {
+			System.out.println("No tags to add.");
+		}
+		
+	}
+	public void removeTags(Set<String> tags2) {
+		// TODO Auto-generated method stub
+		if (tags2 != null && !tags2.isEmpty() && this.tags != null) {
+			this.tags.removeAll(tags2);
+		} else {
+			System.out.println("No tags to remove or no existing tags.");
+		}
+		
+	}
 }
