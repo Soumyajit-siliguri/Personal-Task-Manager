@@ -72,8 +72,7 @@ public class TaskManagerUtility {
 		}
 	}
 	
-	public static Status askStatus(String message) {
-		System.out.println(message);
+	public static Status askStatus() {
 		while (true) {
 			int option = askInt("Please enter the status (1 for TODO, 2 for IN_PROGRESS, 3 for DONE):");
 			switch (option) {
@@ -89,8 +88,7 @@ public class TaskManagerUtility {
 		}
 	}
 	
-	public static Priority askPriority(String message) {
-		System.out.println(message);
+	public static Priority askPriority() {
 		while (true) {
 			int option = askInt("Please enter the priority (1 for LOW, 2 for MEDIUM, 3 for HIGH):");
 			switch (option) {
