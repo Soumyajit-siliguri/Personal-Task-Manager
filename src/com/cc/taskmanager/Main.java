@@ -3,8 +3,12 @@ package com.cc.taskmanager;
 import java.util.List;
 
 import com.cc.taskmanager.data.TempData;
+import com.cc.taskmanager.enums.Priority;
+import com.cc.taskmanager.enums.Status;
 import com.cc.taskmanager.model.Task;
+import com.cc.taskmanager.service.DataService;
 import com.cc.taskmanager.service.TaskService;
+import com.cc.taskmanager.util.TaskManagerUtility;
 
 public class Main {
 
@@ -40,6 +44,27 @@ public class Main {
 				break;
 			case 4:
 				//View all tasks
+				DataService.viewAllTask(TaskList);
+				boolean withFilter = TaskManagerUtility.askYesNo("Do you want to filter tasks? (yes/no): ");
+				if(withFilter) {
+					int filterOption = TaskManagerUtility.askInt("Select filter option:\n1. By Priority\n2. By Status\n3.By Tags\n4.Anything else to skip filter\nPlease enter your choice (1-3): ");
+					switch(filterOption) {
+					case 1:
+						Priority priority = TaskManagerUtility.askPriority();
+						DataService.viewAllTask(TaskList, priority);
+						break;
+					case 2:
+						Status status = TaskManagerUtility.askStatus();
+						DataService.viewAllTask(TaskList, status);
+						break;
+					case 3:
+						System.out.println("Filtering by tags is not implemented yet.");
+						break;
+					default:
+						System.out.println("Skipping filter.");
+						break;
+					}
+				}
 				break;
 			case 5:
 				System.out.println("Exiting the application. Goodbye!");
