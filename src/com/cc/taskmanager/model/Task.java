@@ -1,6 +1,6 @@
 package com.cc.taskmanager.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
 
@@ -12,7 +12,7 @@ public class Task {
 	private int id;
 	private String title;
 	private String description;
-	private LocalDateTime dueDate;
+	private LocalDate dueDate;
 	private Priority priority;
 	private Set<String> tags;
 	private Status status;
@@ -34,10 +34,10 @@ public class Task {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public LocalDateTime getDueDate() {
+	public LocalDate getDueDate() {
 		return dueDate;
 	}
-	public void setDueDate(LocalDateTime dueDate) {
+	public void setDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
 	public Priority getPriority() {
@@ -59,7 +59,7 @@ public class Task {
 		this.status = status;
 	}
 	
-	public Task(String title, String description, LocalDateTime dueDate, Priority priority, Set<String> tags) {
+	public Task(String title, String description, LocalDate dueDate, Priority priority, Set<String> tags) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -70,19 +70,19 @@ public class Task {
 		this.id = ++counter;
 	}
 	
-	public Task(String title, LocalDateTime dueDate) {
+	public Task(String title, LocalDate dueDate) {
 		this(title, "n/a" , dueDate, Priority.LOW, null);
 	}
 	
-	public Task(String title, String description, LocalDateTime dueDate) {
+	public Task(String title, String description, LocalDate dueDate) {
 		this(title, description, dueDate, Priority.LOW, null);
 	}
 	
-	public Task(String title, String description, LocalDateTime dueDate, Priority priority) {
+	public Task(String title, String description, LocalDate dueDate, Priority priority) {
 		this(title, description, dueDate, priority, null);
 	}
 	
-	public Task(String title, LocalDateTime dueDate, Priority priority) {
+	public Task(String title, LocalDate dueDate, Priority priority) {
 		this(title, "n/a", dueDate, priority, null);
 	}
 	@Override
