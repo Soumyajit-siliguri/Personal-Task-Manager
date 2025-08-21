@@ -1,12 +1,61 @@
 package com.cc.taskmanager.service;
 
+import java.time.LocalDate;
+import java.util.Set;
+
+import com.cc.taskmanager.enums.Priority;
 import com.cc.taskmanager.model.Task;
+import com.cc.taskmanager.util.TaskManagerUtility;
 
 public class TaskService {
 	
-	public void addTask(String title, String description, String dueDate, String priority, String tags) {
+	TaskManagerUtility tmu = new TaskManagerUtility();
+	
+	public Task addTask() {
 		// Logic to add a task
-		System.out.println("Task added: " + title);
+		String taskName = TaskManagerUtility.askString("What's the Task?");
+		LocalDate dueDate = TaskManagerUtility.askDate("When is it due? (YYYY-MM-DD)");
+		String description = "";
+		Priority priority = null;
+		Set<String> tagsSet = null; // Initialize tagsSet to null
+		
+		// Optional fields
+		/*
+		 * ALL THE BELOW WILL NO LONGER BE REQUIRED IF SYSTEM GAINS An U.I
+		 */
+		boolean hasDescription = TaskManagerUtility.askYesNo("Does the task have a description? (yes/no)");
+		if (hasDescription) {
+			description = TaskManagerUtility.askString("Please enter the task description:");
+		}
+		boolean hasPriority = TaskManagerUtility.askYesNo("Does the task have a priority? (yes/no)");
+		if (hasPriority) {
+			priority = TaskManagerUtility.askPriority("Please enter the task priority (LOW, MEDIUM, HIGH):");
+			//TODO - validate priority
+		}
+		boolean hasTags = TaskManagerUtility.askYesNo("Does the task have tags? (yes/no)");
+		if (hasTags) {
+			String tags = TaskManagerUtility.askString("Please enter the task tags (comma-separated):");
+			tagsSet = TaskManagerUtility.parseTags(tags);
+		}
+		
+		
+		
+		if(dueDate.isBefore(LocalDate.now())) {
+			System.out.println("Due date cannot be in the past. Please enter a valid due date.");
+			dueDate =  LocalDate.now();// or handle as needed
+		}
+		
+		if(hasDescription && hasPriority && hasTags) {
+			return new Task(taskName, description, dueDate, priority, tagsSet);
+		}else if(hasDescription && hasPriority) {
+			return new Task(taskName, description, dueDate, priority);
+		} else if(hasDescription) {
+			return new Task(taskName, description, dueDate);
+		} else if(hasPriority) {
+			return new Task(taskName, dueDate, priority);
+		}
+		
+		return new Task(taskName, dueDate);
 	}
 	
 	public void updateTask(Task task) {
@@ -51,6 +100,24 @@ public class TaskService {
 		// Logic to change the status of a task
 		System.out.println("Task ID "  + " status changed to: " + newStatus);
 	}
+
+	public int showMainMenu() {
+		System.out.println("Task Manager Menu:");
+		System.out.println("1. Add Task");
+		System.out.println("2. Update Task");
+		System.out.println("3. Delete Task");
+		System.out.println("4. View All Tasks");
+		System.out.println("5. Exit");
+		int option = TaskManagerUtility.askInt("Please select an option (1-5): ");
+		while (option < 1 || option > 5) {
+			System.out.println("Invalid option. Please try again.");
+			option = TaskManagerUtility.askInt("Please select an option (1-5): ");
+		}
+		return option;
+	}
+	
+	
+	
 	
 
 }
