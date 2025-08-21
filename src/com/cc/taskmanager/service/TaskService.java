@@ -29,7 +29,7 @@ public class TaskService {
 		}
 		boolean hasPriority = TaskManagerUtility.askYesNo("Does the task have a priority? (yes/no)");
 		if (hasPriority) {
-			priority = TaskManagerUtility.askPriority("Please enter the task priority (LOW, MEDIUM, HIGH):");
+			priority = TaskManagerUtility.askPriority();
 			//TODO - validate priority
 		}
 		boolean hasTags = TaskManagerUtility.askYesNo("Does the task have tags? (yes/no)");
@@ -115,6 +115,9 @@ public class TaskService {
 		}
 		return option;
 	}
+	
+	
+	
 	
 	
 	

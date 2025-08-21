@@ -23,8 +23,8 @@
 
 ### 🔹 PHASE 2 – Task CRUD Operations (Basic Functionality)
 - [X] Add New Task
-- [ ] View All Tasks (sorted by creation time)
-- [ ] View by Status (filter)
+- [X] View All Tasks (sorted by creation time)
+- [X] View by Status (filter)
 - [ ] Update Task (title, desc, tags, priority, status)
 - [ ] Delete Task
 
