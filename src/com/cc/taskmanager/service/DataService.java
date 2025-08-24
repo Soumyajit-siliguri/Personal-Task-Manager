@@ -33,7 +33,7 @@ public class DataService {
 		 * Replacing both calls with Collectors.toList() to maintain broader Java compatibility:
 		 */
 		
-		if (tasks.isEmpty()) {
+		if (tasks.isEmpty() || tasks == null) {
 			System.out.println("No tasks available.");
 			return;
 		}
@@ -56,7 +56,7 @@ public class DataService {
 	
 public static void viewAllTask(List<Task> tasks, Status status) {
 		
-		if (tasks.isEmpty()) {
+		if (tasks.isEmpty() || tasks == null) {
 			System.out.println("No tasks available.");
 			return;
 		}

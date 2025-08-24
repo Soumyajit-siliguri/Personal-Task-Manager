@@ -37,11 +37,9 @@ public class TaskService {
 			tagsSet = TaskManagerUtility.parseTags(tags);
 		}
 		
-		
-		
-		if(dueDate.isBefore(LocalDate.now())) {
-			System.out.println("Due date cannot be in the past. Please enter a valid due date.");
-			dueDate =  LocalDate.now();// or handle as needed
+		while (dueDate.isBefore(LocalDate.now())) {
+		    System.out.println("Due date cannot be in the past. Please enter a valid date.");
+		    dueDate = TaskManagerUtility.askDate("When is it due? (YYYY-MM-DD)");
 		}
 		
 		if(hasDescription && hasPriority && hasTags) {
