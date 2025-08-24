@@ -9,7 +9,7 @@ import com.cc.taskmanager.enums.Status;
 
 public class Task {
 	static int counter=0;
-	private int id;
+	private final int id;
 	private String title;
 	private String description;
 	private LocalDate dueDate;
@@ -19,9 +19,11 @@ public class Task {
 	public int getId() {
 		return id;
 	}
+	/*
 	public void setId(int id) {
 		this.id = id;
 	}
+	*/
 	public String getTitle() {
 		return title;
 	}
@@ -112,9 +114,7 @@ public class Task {
 		  .append("\nTags=");
 		
 		if (tags != null && !tags.isEmpty()) {
-		  for (String tag : tags) {
-		    sb.append(", ").append(tag);
-		  }
+			sb.append(getTagString());
 		}else {
 			sb.append(" n/a");
 		}
