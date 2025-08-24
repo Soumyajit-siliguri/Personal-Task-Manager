@@ -25,7 +25,7 @@
 - [X] Add New Task
 - [X] View All Tasks (sorted by creation time)
 - [X] View by Status (filter)
-- [X] Update Task (title, desc, tags, priority, status)
+- [X] Update Task (title, description, tags, priority, status)
 - [X] Delete Task
 
 DS Used:
