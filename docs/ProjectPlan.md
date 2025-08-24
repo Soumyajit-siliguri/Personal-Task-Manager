@@ -6,7 +6,7 @@
 - [X] Create Main.java with menu loop
 - [X] Define Task class with:
   - [X] ID, Title, Description
-  - [X] Due Date (as LocalDateTime)
+  - [X] Due Date (as LocalDate)
   - [X] Priority (Enum: LOW, MEDIUM, HIGH)
   - [X] Tags (Set< String >)
   - [X] Status (Enum: TODO, IN_PROGRESS, DONE)
@@ -25,8 +25,8 @@
 - [X] Add New Task
 - [X] View All Tasks (sorted by creation time)
 - [X] View by Status (filter)
-- [ ] Update Task (title, desc, tags, priority, status)
-- [ ] Delete Task
+- [X] Update Task (title, desc, tags, priority, status)
+- [X] Delete Task
 
 DS Used:
 * ArrayList, Enum, Scanner, LocalDateTime
