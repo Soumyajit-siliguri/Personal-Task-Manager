@@ -3,11 +3,13 @@ package com.cc.taskmanager;
 import java.util.List;
 
 import com.cc.taskmanager.data.TempData;
+import com.cc.taskmanager.enums.ActionType;
 import com.cc.taskmanager.enums.Priority;
 import com.cc.taskmanager.enums.Status;
 import com.cc.taskmanager.model.Task;
 import com.cc.taskmanager.service.DataService;
 import com.cc.taskmanager.service.TaskService;
+import com.cc.taskmanager.util.LoggerUtility;
 import com.cc.taskmanager.util.TaskManagerUtility;
 
 public class Main {
@@ -32,8 +34,10 @@ public class Main {
 			switch(action) {
 			case 1:
 				//TODO add new task
-				taskList.add(taskService.addTask());
-				System.out.println("New task added successfully.");
+				Task  newTask= taskService.addTask();
+				taskList.add(newTask);
+				LoggerUtility.log(ActionType.ADD_NEW_TASK, newTask);
+				System.out.println(LoggerUtility.log(ActionType.ADD_NEW_TASK, newTask));
 				break;
 			case 2:
 				//TODO Update existing task

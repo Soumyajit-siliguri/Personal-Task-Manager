@@ -3,9 +3,11 @@ package com.cc.taskmanager.service;
 import java.time.LocalDate;
 import java.util.Set;
 
+import com.cc.taskmanager.enums.ActionType;
 import com.cc.taskmanager.enums.Priority;
 import com.cc.taskmanager.enums.Status;
 import com.cc.taskmanager.model.Task;
+import com.cc.taskmanager.util.LoggerUtility;
 import com.cc.taskmanager.util.TaskManagerUtility;
 
 public class TaskService {
@@ -63,25 +65,31 @@ public class TaskService {
 			case 1:
 				String newTitle = TaskManagerUtility.askString("Enter new title:");
 				changeTitle(task, newTitle);
+				System.out.println(LoggerUtility.log(ActionType.UPDATE_TASK_TITLE, task)); 
 				break;
 			case 2:
 				String newDescription = TaskManagerUtility.askString("Enter new description:");
 				changeDescription(task, newDescription);
+				System.out.println(LoggerUtility.log(ActionType.UPDATE_TASK_DESCRIPTION, task));
 				break;
 			case 3:
 				LocalDate newDueDate = TaskManagerUtility.askDate("Enter new due date (YYYY-MM-DD):");
 				changeDueDate(task, newDueDate);
+				System.out.println(LoggerUtility.log(ActionType.UPDATE_TASK_DUE_DATE, task));
 				break;
 			case 4:
 				Priority newPriority = TaskManagerUtility.askPriority();
 				changePriority(task, newPriority);
+				System.out.println(LoggerUtility.log(ActionType.UPDATE_TASK_PRIORITY, task));
 				break;
 			case 5:
 				changeTags(task);
+				System.out.println(LoggerUtility.log(ActionType.UPDATE_TASK_TAGS, task));
 				break;
 			case 6:
 				Status newStatus = TaskManagerUtility.askStatus();
 				changeStatus(task, newStatus);
+				System.out.println(LoggerUtility.log(ActionType.UPDATE_TASK_STATUS, task));
 				break;
 			default:
 				System.out.println("Invalid option. No changes made.");
