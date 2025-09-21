@@ -12,6 +12,17 @@ import com.cc.taskmanager.util.TaskManagerUtility;
 
 public class TaskService {
 	
+	/**
+	 * Interactively collects task details from the user and constructs a Task.
+	 *
+	 * <p>Prompts for a task title and a due date (re-prompting until a non-past date is provided).
+	 * Optionally collects a description, priority, and comma-separated tags based on yes/no prompts.
+	 * Constructs and returns a Task using the most specific available constructor according to which
+	 * optional fields were supplied.
+	 *
+	 * @return a newly created Task populated with the entered title, due date, and any optional
+	 *         description, priority, and tags
+	 */
 	public Task addTask() {
 		// Logic to add a task
 		String taskName = TaskManagerUtility.askString("What's the Task?");
@@ -58,6 +69,15 @@ public class TaskService {
 		return new Task(taskName, dueDate);
 	}
 	
+	/**
+	 * Presents an interactive menu to select and apply an update to the given task.
+	 *
+	 * <p>Prompts the user to choose which field to modify (Title, Description, Due Date, Priority, Tags, or Status),
+	 * reads the new value using TaskManagerUtility, invokes the appropriate change* helper to apply validation and update
+	 * the Task, and logs the performed action. If the user selects an invalid option, no changes are made.</p>
+	 *
+	 * @param task the Task to be updated (must not be null)
+	 */
 	public void updateTask(Task task) {
 		// Logic to update a task
 		//TODO - ask what to update and update accordingly if task present
@@ -108,6 +128,16 @@ public class TaskService {
 	
 	
 	
+	/**
+	 * Update the given task's title if the provided new title is non-empty.
+	 *
+	 * If {@code newTitle} is null or empty (after trimming) the task is left unchanged
+	 * and a message is printed. On success the task's title is set and a confirmation
+	 * message containing the task ID and new title is printed.
+	 *
+	 * @param task the Task to update
+	 * @param newTitle the new title to set; must be non-null and contain non-whitespace characters
+	 */
 	public void changeTitle(Task task, String newTitle) {
 		// Logic to change the title of a task
 		if(newTitle == null || newTitle.trim().isEmpty()) {
@@ -149,6 +179,17 @@ public class TaskService {
 		System.out.println("Task ID "  + " priority changed to: " + newPriority);
 	}
 	
+	/**
+	 * Prompt the user to add, remove, or replace the tags on the given task.
+	 *
+	 * Displays the task's current tags, asks the user to choose one of three actions (1 = add, 2 = remove, 3 = replace),
+	 * reads a comma-separated tag list from user input, parses it, and applies the change to the task's tag set.
+	 *
+	 * If an invalid option is chosen, no changes are made. The task's tags are mutated in place and a confirmation
+	 * message with the resulting tag string is printed.
+	 *
+	 * @param task the Task whose tags will be modified; must not be null
+	 */
 	public void changeTags(Task task) {
 		// Logic to change the tags of a task
 		//TODO - ask : add, remove or replace tags
@@ -185,11 +226,12 @@ public class TaskService {
 	}
 
 	/**
-	 * Displays the main Task Manager menu, prompts the user to choose an option, validates the selection, and returns it.
+	 * Display the main Task Manager menu, prompt for a choice, validate it, and return the selected option.
 	 *
-	 * The printed menu lists six choices (1–6). Input validation currently accepts only values 1–5 and will re-prompt until a value in that range is entered.
+	 * The menu lists six choices (1–6). Input is read via TaskManagerUtility.askInt and is validated in a loop;
+	 * only values 1–5 are accepted, so option 6 ("Exit") will be rejected and the user will be re-prompted.
 	 *
-	 * @return the user's selected menu option (validated to be between 1 and 5)
+	 * @return the validated menu option (an integer in the range 1–5)
 	 */
 	public int showMainMenu() {
 		System.out.println("Task Manager Menu:");

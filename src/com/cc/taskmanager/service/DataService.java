@@ -9,7 +9,13 @@ import com.cc.taskmanager.model.Task;
 
 public class DataService {
 	
-	//lets use over ride logic here
+	/**
+	 * Prints all tasks sorted by due date (ascending).
+	 *
+	 * The provided list is sorted in-place and each task is printed to standard output.
+	 *
+	 * @param tasks list of tasks to display; must be non-null. If empty, a "No tasks available." message is printed.
+	 */
 	
 	public static void viewAllTask(List<Task> tasks) {
 		
