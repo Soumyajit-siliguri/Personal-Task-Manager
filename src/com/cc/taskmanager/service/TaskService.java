@@ -114,6 +114,7 @@ public class TaskService {
 			System.out.println("Title cannot be empty. No changes made.");
 			return;
 		}else {
+			
 			task.setTitle(newTitle);
 		}
 		System.out.println("Task ID " + task.getId() + " title changed to: " + task.getTitle());

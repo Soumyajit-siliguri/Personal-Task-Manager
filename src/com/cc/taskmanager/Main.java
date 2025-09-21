@@ -119,6 +119,7 @@ public class Main {
 				default:
 					System.out.println("Option not available. Moving to main menu...");
 					break switch2;
+					
 				}
 				break;
 			case 6:
