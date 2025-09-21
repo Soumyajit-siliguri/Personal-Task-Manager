@@ -13,20 +13,13 @@ import com.cc.taskmanager.util.LoggerUtility;
 
 public class ProductivityService {
 	
-	/*
-	 * methods:
-	 * 1. [ ] View Top Priority Tasks
-	 * 2. [ ] View Upcoming Due Tasks
-	 * 3. [ ] Undo Deleted Task
-	 * 4. [ ] Task History
-	 * 5. [ ] Fast Search by Title/Keyword
-	 * 6. [ ] Tag-Based Search
-	 * 7. [ ] Sort by Custom Logic (date + priority + status)
-	 * 8. [ ] Save/Load Tasks from File
-	 * 9. [ ] Count Tasks by Status / Tag
-	 * 10. [ ] Split Complex Task into Subtasks (Recursive)
-	 * 11. [ ] Time Logs per Task
-	 * 12. [ ] Filter Task Logs between Date Ranges
+	/**
+	 * Prints the given tasks to standard output ordered by their priority (ascending).
+	 *
+	 * Builds a PriorityQueue using Task.getPriority() as the comparison key and prints
+	 * tasks from highest-to-lowest priority according to the queue's ascending order.
+	 *
+	 * @param taskList the collection of tasks to order and display; the list itself is not modified
 	 */
 	
 	public void viewTopPriorityTasks(List<Task> taskList) {
@@ -43,6 +36,14 @@ public class ProductivityService {
 		
 	}
 	
+	/**
+	 * Prints tasks from the provided list that are due today or later, ordered by earliest due date first.
+	 *
+	 * <p>Filters the input tasks to include only those whose due date is on or after the current system date
+	 * (LocalDate.now()) and whose status is neither DONE nor DELETED, then outputs them in ascending due-date order.</p>
+	 *
+	 * @param taskList the list of tasks to inspect; expected to contain Task instances with non-null due dates and statuses
+	 */
 	public void viewUpcomingDueTasks(List<Task> taskList) {
 		
 	    PriorityQueue<Task> minHeap = new PriorityQueue<>(
@@ -69,6 +70,21 @@ public class ProductivityService {
 		
 	}
 	
+	/**
+	 * Restores the most recently deleted Task from the provided stack back into the working task list.
+	 *
+	 * If the deletedTasks stack is non-empty this method pops the top Task (LIFO). If no Task in tempData
+	 * has the same id, the method adds the popped Task to tempData, prints a restoration message, and
+	 * records the undo action via LoggerUtility. If a Task with the same id already exists in tempData,
+	 * it prints an ID conflict message and does not restore. If deletedTasks is empty, a message is printed.
+	 *
+	 * Side effects:
+	 * - May modify tempData (adds a Task) and deletedTasks (pops a Task).
+	 * - Prints status messages to standard output and logs the undo action via LoggerUtility when restoration occurs.
+	 *
+	 * @param tempData     the working list of tasks to restore into
+	 * @param deletedTasks a stack of deleted tasks where the most recently deleted task is at the top
+	 */
 	public void undoDeletedTask(List<Task> tempData, Stack<Task> deletedTasks) {
 		if (!deletedTasks.isEmpty()) {
 	        Task taskToRestore = deletedTasks.pop(); // LIFO: get the last deleted task
@@ -89,6 +105,15 @@ public class ProductivityService {
 		
 	}
 	
+	/**
+	 * Display the application's task modification history to the user.
+	 *
+	 * <p>Placeholder method: intended to present a chronological view of recent task events
+	 * (creations, updates, deletions). Implementations may use a time-ordered collection
+	 * (e.g., List/LinkedList or Queue/Deque) to maintain and iterate recent history entries,
+	 * and should format each history entry with a timestamp, task identifier, and brief action
+	 * description.</p>
+	 */
 	public static void viewTaskHistory() {
 		// TODO List or LinkedList to maintain history
 		//OR TODO Queue or Deque (view recently modified tasks)
