@@ -49,7 +49,6 @@ public class Main {
 				//TODO add new task
 				Task  newTask= taskService.addTask();
 				taskList.add(newTask);
-				LoggerUtility.log(ActionType.ADD_NEW_TASK, newTask);
 				System.out.println(LoggerUtility.log(ActionType.ADD_NEW_TASK, newTask));
 				break;
 			case 2:
@@ -58,8 +57,8 @@ public class Main {
 				Task taskToUpdate = DataService.getTaskById(taskList, taskId);
 				if(taskToUpdate != null) {
 					taskService.updateTask(taskToUpdate);
-					System.out.println("Task updated successfully.");
-					System.out.println("updated task: "+ taskList.get(taskId));
+					//System.out.println("Task updated successfully.");
+					//System.out.println("updated task: "+ taskList.get(taskId-1));
 				} else {
 					System.out.println("Task with ID " + taskId + " not found.");
 				}
@@ -72,42 +71,57 @@ public class Main {
 			case 4:
 				//View all tasks
 				DataService.viewAllTask(taskList);
-				boolean withFilter = TaskManagerUtility.askYesNo("Do you want to filter tasks? (yes/no): ");
-				if(withFilter) {
-					int filterOption = TaskManagerUtility.askInt("Select filter option:\n1. By Priority\n2. By Status\n3.By Tags\n4.Anything else to skip filter\nPlease enter your choice (1-3): ");
-					switch(filterOption) {
-					case 1:
-						Priority priority = TaskManagerUtility.askPriority();
-						DataService.viewAllTask(taskList, priority);
-						break;
-					case 2:
-						Status status = TaskManagerUtility.askStatus();
-						DataService.viewAllTask(taskList, status);
-						break;
-					case 3:
-						System.out.println("Filtering by tags is not implemented yet.");
-						break;
-					default:
-						System.out.println("Skipping filter.");
-						break;
+				if(!taskList.isEmpty() || taskList.size()>0) {
+					boolean withFilter = TaskManagerUtility.askYesNo("Do you want to filter tasks? (yes/no): ");
+					if(withFilter) {
+						int filterOption = TaskManagerUtility.askInt("Select filter option:\n"
+								+ "1. By Priority\n"
+								+ "2. By Status\n"
+								+ "3. By Tags\n"
+								+ "4.Anything else to skip filter\n"
+								+ "Please enter your choice (1-3): ");
+						switch(filterOption) {
+						case 1:
+							Priority priority = TaskManagerUtility.askPriority();
+							DataService.viewAllTask(taskList, priority);
+							break;
+						case 2:
+							Status status = TaskManagerUtility.askStatus();
+							DataService.viewAllTask(taskList, status);
+							break;
+						case 3:
+							System.out.println("Filtering by tags is not implemented yet.");
+							break;
+						default:
+							System.out.println("Skipping filter.");
+							break;
+						}
 					}
 				}
 				break;
 			case 5:
-				int productivityOption = TaskManagerUtility.askInt("What do you want to do?\n1. View Top Priority Tasks\n2. View Upcoming Due Tasks\n3. ");
+				int productivityOption = TaskManagerUtility.askInt("What do you want to do?\n"
+						+ "1. View Top Priority Tasks\n"
+						+ "2. View Upcoming Due Tasks\n"
+						+ "3. Undo Deleted Task\n");
 				
+				switch2:
 				switch (productivityOption) {
 				case 1:
 					productivityService.viewTopPriorityTasks(taskList);
-					break;
+					break switch2;
 				case 2:
 					productivityService.viewUpcomingDueTasks(taskList);
+					break switch2;
 				case 3:
 					productivityService.undoDeletedTask(taskList, deletedTasks);
+					break switch2;
 				default:
-					System.out.println("Otion not available. Moving to main menu..");
-					break;
+					System.out.println("Option not available. Moving to main menu...");
+					break switch2;
+					
 				}
+				break;
 			case 6:
 				System.out.println("Exiting the application. Goodbye!");
 				running = false;
