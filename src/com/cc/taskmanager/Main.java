@@ -16,6 +16,15 @@ import com.cc.taskmanager.util.TaskManagerUtility;
 
 public class Main {
 
+	/**
+	 * Application entry point that starts the interactive Personal Task Manager loop.
+	 *
+	 * <p>Initializes in-memory task data and services, then enters a console-driven loop
+	 * to add, update, delete, view, and manage tasks (including productivity features and undo
+	 * for deleted tasks). The loop continues until the user selects the exit option.</p>
+	 *
+	 * @param args command-line arguments (not used by this application) 
+	 */
 	public static void main(String[] args) {
 		
 		List<Task> taskList = TempData.getTempData();
