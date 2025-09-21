@@ -176,7 +176,8 @@ public class TaskService {
 		System.out.println("2. Update Task");
 		System.out.println("3. Delete Task");
 		System.out.println("4. View All Tasks");
-		System.out.println("5. Exit");
+		System.out.println("5. Use Productivity Tools");
+		System.out.println("6. Exit");
 		int option = TaskManagerUtility.askInt("Please select an option (1-5): ");
 		while (option < 1 || option > 5) {
 			System.out.println("Invalid option. Please try again.");

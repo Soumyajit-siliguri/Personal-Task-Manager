@@ -1,5 +1,16 @@
 package com.cc.taskmanager.service;
 
+import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Stack;
+
+import com.cc.taskmanager.enums.ActionType;
+import com.cc.taskmanager.enums.Status;
+import com.cc.taskmanager.model.Task;
+import com.cc.taskmanager.util.LoggerUtility;
+
 public class ProductivityService {
 	
 	/*
@@ -18,17 +29,64 @@ public class ProductivityService {
 	 * 12. [ ] Filter Task Logs between Date Ranges
 	 */
 	
-	public static void viewTopPriorityTasks() {
-		// TODO PriorityQueue with custom Comparator
+	public void viewTopPriorityTasks(List<Task> taskList) {
+		 PriorityQueue<Task> pq = new PriorityQueue<>(
+				 (t1, t2) -> t1.getPriority().compareTo(t2.getPriority())
+				 );
+		 
+		 pq.addAll(taskList);
+		 
+		 System.out.println("Tasks in priority order:");
+		    while (!pq.isEmpty()) {
+		        System.out.println(pq.poll());
+		    }
 		
 	}
 	
-	public static void viewUpcomingDueTasks() {
-		// TODO MinHeap or simple sort on due date
+	public void viewUpcomingDueTasks(List<Task> taskList) {
+		
+	    PriorityQueue<Task> minHeap = new PriorityQueue<>(
+	        Comparator.comparing(Task::getDueDate)   // earliest due date first
+	    );
+	    
+	 // Load tasks into heap
+	 // Add only tasks whose dueDate >= today
+	   /* for (Task task : taskList) {
+	        if (!task.getDueDate().isBefore(LocalDate.now()) && !task.getStatus().equals(Status.DONE) && !task.getStatus().equals(Status.DELETED)) { // keep today + future
+	            minHeap.add(task);
+	        }
+	    }
+	    */
+	    taskList.stream()
+        .filter(task -> !task.getDueDate().isBefore(LocalDate.now()))
+        .filter(task -> task.getStatus() != Status.DONE && task.getStatus() != Status.DELETED)
+        .forEach(minHeap::add); 
+
+	    System.out.println("Upcoming due tasks (soonest first):");
+	    while (!minHeap.isEmpty()) {
+	        System.out.println(minHeap.poll());
+	    }
+		
 	}
 	
-	public static void undoDeletedTask() {
-		// TODO Stack to store deleted tasks for undo
+	public void undoDeletedTask(List<Task> tempData, Stack<Task> deletedTasks) {
+		if (!deletedTasks.isEmpty()) {
+	        Task taskToRestore = deletedTasks.pop(); // LIFO: get the last deleted task
+	        
+	        boolean exists = tempData.stream().anyMatch(t -> t.getId() == taskToRestore.getId());
+	        if (!exists) {
+	            tempData.add(taskToRestore);
+	            System.out.println("Task restored: " + taskToRestore);
+	            System.out.println(LoggerUtility.log(ActionType.UNDO_DELETE_TASK, taskToRestore));
+	        } else {
+	            System.out.println("Cannot restore task — ID already exists: " + taskToRestore.getId());
+	        }
+ 
+	    } else {
+	        System.out.println("No deleted tasks to undo.");
+	    }
+		
+		
 	}
 	
 	public static void viewTaskHistory() {
