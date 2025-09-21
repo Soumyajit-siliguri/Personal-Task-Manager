@@ -1,6 +1,7 @@
 package com.cc.taskmanager;
 
 import java.util.List;
+import java.util.Stack;
 
 import com.cc.taskmanager.data.TempData;
 import com.cc.taskmanager.enums.ActionType;
@@ -8,6 +9,7 @@ import com.cc.taskmanager.enums.Priority;
 import com.cc.taskmanager.enums.Status;
 import com.cc.taskmanager.model.Task;
 import com.cc.taskmanager.service.DataService;
+import com.cc.taskmanager.service.ProductivityService;
 import com.cc.taskmanager.service.TaskService;
 import com.cc.taskmanager.util.LoggerUtility;
 import com.cc.taskmanager.util.TaskManagerUtility;
@@ -17,6 +19,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		List<Task> taskList = TempData.getTempData();
+		Stack<Task> deletedTasks = TempData.getDeletedTasks();
 		
 		// This is the entry point of the application.
 		// You can initialize your application here, set up the user interface, etc.
@@ -24,6 +27,7 @@ public class Main {
 		
 		// Example usage of TaskService
 		TaskService taskService = new TaskService();
+		ProductivityService productivityService = new ProductivityService();
 
 		// You can add more functionality or user interaction here.
 		
@@ -81,6 +85,21 @@ public class Main {
 				}
 				break;
 			case 5:
+				int productivityOption = TaskManagerUtility.askInt("What do you want to do?\n1. View Top Priority Tasks\n2. View Upcoming Due Tasks\n3. ");
+				
+				switch (productivityOption) {
+				case 1:
+					productivityService.viewTopPriorityTasks(taskList);
+					break;
+				case 2:
+					productivityService.viewUpcomingDueTasks(taskList);
+				case 3:
+					productivityService.undoDeletedTask(taskList, deletedTasks);
+				default:
+					System.out.println("Otion not available. Moving to main menu..");
+					break;
+				}
+			case 6:
 				System.out.println("Exiting the application. Goodbye!");
 				running = false;
 				break;
