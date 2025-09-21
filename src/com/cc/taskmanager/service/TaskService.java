@@ -16,6 +16,10 @@ public class TaskService {
 		// Logic to add a task
 		String taskName = TaskManagerUtility.askString("What's the Task?");
 		LocalDate dueDate = TaskManagerUtility.askDate("When is it due? (YYYY-MM-DD)");
+		while (dueDate.isBefore(LocalDate.now())) {
+		    System.out.println("Due date cannot be in the past. Please enter a valid date.");
+		    dueDate = TaskManagerUtility.askDate("When is it due? (YYYY-MM-DD)");
+		}
 		String description = "";
 		Priority priority = null;
 		Set<String> tagsSet = null; // Initialize tagsSet to null
@@ -39,10 +43,7 @@ public class TaskService {
 			tagsSet = TaskManagerUtility.parseTags(tags);
 		}
 		
-		while (dueDate.isBefore(LocalDate.now())) {
-		    System.out.println("Due date cannot be in the past. Please enter a valid date.");
-		    dueDate = TaskManagerUtility.askDate("When is it due? (YYYY-MM-DD)");
-		}
+		
 		
 		if(hasDescription && hasPriority && hasTags) {
 			return new Task(taskName, description, dueDate, priority, tagsSet);
@@ -60,7 +61,14 @@ public class TaskService {
 	public void updateTask(Task task) {
 		// Logic to update a task
 		//TODO - ask what to update and update accordingly if task present
-		int option = TaskManagerUtility.askInt("What do you want to update?\n1. Title\n2. Description\n3. Due Date\n4. Priority\n5. Tags\n6. Status\nPlease enter your choice (1-6): ");
+		int option = TaskManagerUtility.askInt("What do you want to update?\n"
+				+ "1. Title\n"
+				+ "2. Description\n"
+				+ "3. Due Date\n"
+				+ "4. Priority\n"
+				+ "5. Tags\n"
+				+ "6. Status\n"
+				+ "Please enter your choice (1-6): ");
 		switch (option) {
 			case 1:
 				String newTitle = TaskManagerUtility.askString("Enter new title:");
@@ -93,8 +101,9 @@ public class TaskService {
 				break;
 			default:
 				System.out.println("Invalid option. No changes made.");
+				break;
 		}
-		System.out.println("Task updated: " + task.getTitle());
+		
 	}
 	
 	
@@ -143,7 +152,11 @@ public class TaskService {
 		// Logic to change the tags of a task
 		//TODO - ask : add, remove or replace tags
 		System.out.println("Current tags: " + task.getTagString());
-		int option = TaskManagerUtility.askInt("What do you want to do with tags?\n1. Add Tags\n2. Remove Tags\n3. Replace Tags\nPlease enter your choice (1-3): ");
+		int option = TaskManagerUtility.askInt("What do you want to do with tags?\n"
+				+ "1. Add Tags\n"
+				+ "2. Remove Tags\n"
+				+ "3. Replace Tags\n"
+				+ "Please enter your choice (1-3): ");
 		switch (option) {
 			case 1:
 				String addTags = TaskManagerUtility.askString("Enter tags to add (comma-separated):");
@@ -185,10 +198,10 @@ public class TaskService {
 		System.out.println("4. View All Tasks");
 		System.out.println("5. Use Productivity Tools");
 		System.out.println("6. Exit");
-		int option = TaskManagerUtility.askInt("Please select an option (1-5): ");
+		int option = TaskManagerUtility.askInt("Please select an option (1-6): ");
 		while (option < 1 || option > 5) {
 			System.out.println("Invalid option. Please try again.");
-			option = TaskManagerUtility.askInt("Please select an option (1-5): ");
+			option = TaskManagerUtility.askInt("Please select an option (1-6): ");
 		}
 		return option;
 	}
