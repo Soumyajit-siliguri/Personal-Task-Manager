@@ -77,8 +77,18 @@ public static void viewAllTask(List<Task> tasks, Status status) {
 		}
 	}
 
+	/**
+	 * Deletes the task with the given ID from the temporary storage.
+	 *
+	 * If the provided ID is negative, the method prints "Invalid task ID." and does nothing.
+	 * If no task with the given ID exists, the method prints "Task with ID {id} not found." and does nothing.
+	 * On success, the task is removed from TempData and the method prints "Task deleted with ID: {id}".
+	 *
+	 * @param taskId the identifier of the task to delete; must be non-negative
+	 */
 	public static void deleteTask(int taskId) {
 	// Logic to delete a task
+		
 		if (taskId < 0) {
 			System.out.println("Invalid task ID.");
 			return;

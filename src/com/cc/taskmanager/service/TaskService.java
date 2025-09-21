@@ -170,13 +170,21 @@ public class TaskService {
 		System.out.println("Task ID "  + " status changed to: " + newStatus);
 	}
 
+	/**
+	 * Displays the main Task Manager menu, prompts the user to choose an option, validates the selection, and returns it.
+	 *
+	 * The printed menu lists six choices (1–6). Input validation currently accepts only values 1–5 and will re-prompt until a value in that range is entered.
+	 *
+	 * @return the user's selected menu option (validated to be between 1 and 5)
+	 */
 	public int showMainMenu() {
 		System.out.println("Task Manager Menu:");
 		System.out.println("1. Add Task");
 		System.out.println("2. Update Task");
 		System.out.println("3. Delete Task");
 		System.out.println("4. View All Tasks");
-		System.out.println("5. Exit");
+		System.out.println("5. Use Productivity Tools");
+		System.out.println("6. Exit");
 		int option = TaskManagerUtility.askInt("Please select an option (1-5): ");
 		while (option < 1 || option > 5) {
 			System.out.println("Invalid option. Please try again.");
