@@ -79,6 +79,7 @@ public static void viewAllTask(List<Task> tasks, Status status) {
 
 	public static void deleteTask(int taskId) {
 	// Logic to delete a task
+		
 		if (taskId < 0) {
 			System.out.println("Invalid task ID.");
 			return;
