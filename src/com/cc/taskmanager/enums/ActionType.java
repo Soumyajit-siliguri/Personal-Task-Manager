@@ -10,6 +10,5 @@ public enum ActionType {
 	DELETE_TASK,
 	UNDO_DELETE_TASK,
 	UPDATE_TASK_TAGS
-	
 
 }

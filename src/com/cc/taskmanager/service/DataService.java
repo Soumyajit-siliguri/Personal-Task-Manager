@@ -18,7 +18,7 @@ public class DataService {
 			return;
 		}
 		
-		// Dislays in sorted manner with respected to due date
+		// Dis lays in sorted manner with respected to due date
 		
 		tasks.sort((task1, task2) -> task1.getDueDate().compareTo(task2.getDueDate()));
 		System.out.println("All Tasks:");
